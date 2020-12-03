@@ -5,7 +5,7 @@ import styles from '../../styles/Home.module.css'
 export default function JobOffer({ offer }) {
   const { id, title, company_name, company_logo_url } = offer
   return (
-    <div className={styles.container}>
+    <div>
       <pre>{id}</pre>
       <h3>{title}</h3>
       <p>{company_name}</p>
