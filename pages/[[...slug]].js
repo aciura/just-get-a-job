@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import OffersList from '../components/OffersList'
 import { getAllJobOffers } from '../services/jobService'
 import { propsify } from '../services/utils'
 import { useRouter } from 'next/router'
 import Slider from 'react-rangeslider'
+import dynamic from 'next/dynamic'
 
 import 'react-rangeslider/lib/index.css'
 import styles from '../styles/Home.module.css'
@@ -20,8 +21,18 @@ export default function Home({ jobOffers, offerCategories }) {
 
   const filterJobs = () => jobOffers.filter((job) => job.salary_to > minSalary)
 
+  const Map = useMemo(
+    () =>
+      dynamic(() => import('../components/Map'), {
+        loading: () => <p>Loading map...</p>,
+        ssr: false,
+      }),
+    [],
+  )
+
   return (
     <>
+      <Map />
       <div>
         <button onClick={() => router.push('/')}>All</button>
         {offerCategories.map((category) => (
