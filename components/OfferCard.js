@@ -10,7 +10,7 @@ export default function OfferCard({
   salary_currency,
 }) {
   return (
-    <Link href={`/offer/${id}`}>
+    <Link href={`/offer/${encodeURIComponent(id)}`}>
       <a className={styles.card}>
         <h3>{title}</h3>
         <p>{company_name}</p>
