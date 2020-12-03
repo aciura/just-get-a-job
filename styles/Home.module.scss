@@ -23,41 +23,38 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.footer img {
-  margin-left: 0.5rem;
-}
+  img {
+    margin-left: 0.5rem;
+  }
 
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .title {
+  text-align: center;
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+
+  a {
+    color: #0070f3;
+    text-decoration: none;
+
+    a:hover,
+    a:focus,
+    a:active {
+      text-decoration: underline;
+    }
+  }
 }
 
-.title,
 .description {
   text-align: center;
-}
-
-.description {
   line-height: 1.5;
   font-size: 1.5rem;
 }
@@ -94,31 +91,31 @@
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 9999;
   display: block;
-}
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-.spinner::after {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 48%;
-  top: 40%;
-  width: 40px;
-  height: 40px;
-  border-style: solid;
-  border-color: black;
-  border-top-color: transparent;
-  border-width: 4px;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 48%;
+    top: 40%;
+    width: 40px;
+    height: 40px;
+    border-style: solid;
+    border-color: black;
+    border-top-color: transparent;
+    border-width: 4px;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
 }
 
 @media (max-width: 600px) {

@@ -7,7 +7,7 @@ import Slider from 'react-rangeslider'
 import dynamic from 'next/dynamic'
 
 import 'react-rangeslider/lib/index.css'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss'
 
 export default function Home({ jobOffers, offerCategories }) {
   const [minSalary, setMinSalary] = React.useState(0)
