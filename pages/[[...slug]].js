@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import OffersList from '../components/OffersList'
 import { getAllJobOffers } from '../services/jobService'
 import { propsify } from '../services/utils'
@@ -19,7 +19,7 @@ export default function Home({ jobOffers, offerCategories }) {
     setMinSalary(minSalary)
   }
 
-  const filterJobs = () => jobOffers.filter((job) => job.salary_to > minSalary)
+  const displayedJobs = jobOffers.filter((job) => job.salary_to > minSalary)
 
   const Map = useMemo(
     () =>
@@ -31,8 +31,9 @@ export default function Home({ jobOffers, offerCategories }) {
   )
 
   return (
-    <>
-      <Map />
+    <div>
+      <Map jobOffers={displayedJobs} />
+
       <div>
         <button onClick={() => router.push('/')}>
           <span>ALL</span>
@@ -59,9 +60,9 @@ export default function Home({ jobOffers, offerCategories }) {
       </div>
 
       <div className={styles.grid}>
-        <OffersList cards={filterJobs(jobOffers)} />
+        <OffersList cards={displayedJobs} />
       </div>
-    </>
+    </div>
   )
 }
 
