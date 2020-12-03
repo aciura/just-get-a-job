@@ -92,7 +92,7 @@ export async function getStaticProps(context) {
   const filterByCategory = (job) =>
     !slug || slug.length < 2 || job.marker_icon === slug[1]
   return {
-    revalidate: 5 /*sec*/,
+    revalidate: 60 /*sec*/,
     ...propsify({
       jobOffers: jobOffers.filter((job) => filterByCategory(job)),
       offerCategories,
