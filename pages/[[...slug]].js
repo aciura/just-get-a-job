@@ -34,7 +34,9 @@ export default function Home({ jobOffers, offerCategories }) {
     <>
       <Map />
       <div>
-        <button onClick={() => router.push('/')}>All</button>
+        <button onClick={() => router.push('/')}>
+          <span>ALL</span>
+        </button>
         {offerCategories.map((category) => (
           <button
             key={category}
@@ -44,12 +46,12 @@ export default function Home({ jobOffers, offerCategories }) {
         ))}
       </div>
 
-      <div style={{ width: '10rem' }}>
+      <div style={{ width: '50%' }}>
         <label htmlFor='minSalary'>Min Salary {minSalary}</label>
         <Slider
           value={minSalary}
           min={0}
-          max={50000}
+          max={30000}
           step={1000}
           tooltip={false}
           onChange={handleMinSalaryChange}
