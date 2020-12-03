@@ -3,7 +3,9 @@ import OffersList from '../components/OffersList'
 import { getAllJobOffers } from '../services/jobService'
 import { propsify } from '../services/utils'
 import { useRouter } from 'next/router'
+import Slider from 'react-rangeslider'
 
+import 'react-rangeslider/lib/index.css'
 import styles from '../styles/Home.module.css'
 
 export default function Home({ jobOffers, offerCategories }) {
@@ -11,8 +13,8 @@ export default function Home({ jobOffers, offerCategories }) {
 
   const router = useRouter()
 
-  const handleMinSalaryChange = (e) => {
-    const minSalary = Number(e.target.value)
+  const handleMinSalaryChange = (value) => {
+    const minSalary = Number(value)
     setMinSalary(minSalary)
   }
 
@@ -31,12 +33,14 @@ export default function Home({ jobOffers, offerCategories }) {
         ))}
       </div>
 
-      <div>
-        <label htmlFor='minSalary'>Min Salary</label>
-        <input
-          type='number'
-          id='minSalary'
+      <div style={{ width: '10rem' }}>
+        <label htmlFor='minSalary'>Min Salary {minSalary}</label>
+        <Slider
           value={minSalary}
+          min={0}
+          max={50000}
+          step={1000}
+          tooltip={false}
           onChange={handleMinSalaryChange}
         />
       </div>
