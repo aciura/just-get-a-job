@@ -37,15 +37,7 @@ function MyApp({ Component, pageProps }) {
       <main className={styles.main}>
         <h1 className={styles.title}>Just Join Corpo!</h1>
         <p className={styles.description}>Find your dream job</p>
-        {loading && (
-          <Image
-            className={styles.spinner}
-            src='/spinner.gif'
-            alt='laoding spinner'
-            width='320'
-            height='335'
-          />
-        )}
+        {loading && <div className={styles.spinner} />}
         <Component {...pageProps} />
       </main>
 
