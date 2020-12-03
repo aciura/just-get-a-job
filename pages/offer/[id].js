@@ -1,6 +1,5 @@
 import { getAllJobIds, getJobOffer } from '../../services/jobService'
 import Image from 'next/image'
-import styles from '../../styles/Home.module.scss'
 import { useRouter } from 'next/router'
 
 export default function JobOffer({ offer }) {
@@ -8,11 +7,11 @@ export default function JobOffer({ offer }) {
   const router = useRouter()
   return (
     <div>
-      <button onClick={() => router.back()}>{'<'}Back</button>
+      <button onClick={() => router.back()}>{'<'} Back</button>
       <pre>{id}</pre>
       <h3>{title}</h3>
       <p>{company_name}</p>
-      <Image src={company_logo_url} width={64} height={64} />
+      <Image src={company_logo_url} width={'100%'} height={'100%'} />
     </div>
   )
 }

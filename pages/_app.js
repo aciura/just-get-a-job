@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/globals.css'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import styles from '../styles/Home.module.scss'
+import styles from '../styles/App.module.scss'
 import Image from 'next/image'
 
 function MyApp({ Component, pageProps }) {

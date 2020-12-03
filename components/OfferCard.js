@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import styles from './OfferCard.module.css'
+import styles from './OfferCard.module.scss'
 
 export default function OfferCard({
   id,
