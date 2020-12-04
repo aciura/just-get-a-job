@@ -2,7 +2,7 @@ import React from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
-
+import Link from 'next/link'
 delete L.Icon.Default.prototype._getIconUrl
 
 // Known issue with Leaflet & webpack: https://github.com/PaulLeCam/react-leaflet/issues/453
@@ -41,8 +41,8 @@ const Map = ({ jobOffers }) => {
   return (
     <MapContainer
       center={[center.latitude, center.longitude]}
-      zoom={5}
-      scrollWheelZoom={false}
+      zoom={6}
+      scrollWheelZoom={true}
       style={{ height: 400, width: '100%' }}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -51,11 +51,15 @@ const Map = ({ jobOffers }) => {
       {jobOffers.map((offer) => (
         <Marker key={offer.id} position={[offer.latitude, offer.longitude]}>
           <Popup>
-            {offer.title}
-            <br />
-            {offer.company_name}
-            <br />
-            {offer.salary_from}-{offer.salary_to}
+            <>
+              <Link href={`/offer/${offer.id}`}>
+                <a>{offer.title}</a>
+              </Link>
+              <br />
+              {offer.company_name}
+              <br />
+              {offer.salary_from}-{offer.salary_to}
+            </>
           </Popup>
         </Marker>
       ))}
