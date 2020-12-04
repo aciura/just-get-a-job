@@ -8,6 +8,7 @@ export default function OfferCard({
   salary_from,
   salary_to,
   salary_currency,
+  city,
 }) {
   return (
     <Link href={`/offer/${encodeURIComponent(id)}`}>
@@ -18,6 +19,7 @@ export default function OfferCard({
           {salary_from}-{salary_to}
           {salary_currency}
         </p>
+        <p>{city}</p>
       </a>
     </Link>
   )
