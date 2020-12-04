@@ -55,11 +55,14 @@
     @media (min-width: 600px) {
       width: 60%;
     }
+
     button {
       padding: 10px;
       transition: transform 0.1s ease-in;
+      margin: 4px;
+
       &:hover {
-        transform: scale(1.2);
+        transform: scale(1.2) !important;
       }
     }
 

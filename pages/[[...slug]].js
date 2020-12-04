@@ -59,7 +59,6 @@ export default function Home({ jobOffers, offerCategories }) {
           <button
             style={{
               fontSize: `${Math.max(12, count / 2)}px`,
-              margin: '2px',
               transform: `rotate(${Math.ceil(Math.random() * 10) - 5}deg)`,
             }}
             key={category}
