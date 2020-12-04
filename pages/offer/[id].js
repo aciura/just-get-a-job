@@ -1,18 +1,25 @@
 import { getAllJobIds, getJobOffer } from '../../services/jobService'
 import Image from 'next/image'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 export default function JobOffer({ offer }) {
   const { id, title, company_name, company_logo_url } = offer
   const router = useRouter()
   return (
-    <div>
-      <button onClick={() => router.back()}>{'<'} Back</button>
-      <pre>{id}</pre>
-      <h3>{title}</h3>
-      <p>{company_name}</p>
-      <Image src={company_logo_url} width={'100%'} height={'100%'} />
-    </div>
+    <>
+      <Head>
+        <title>{title}</title>
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+      <div>
+        <button onClick={() => router.back()}>{'<'} Back</button>
+        <pre>{id}</pre>
+        <h3>{title}</h3>
+        <p>{company_name}</p>
+        <Image src={company_logo_url} width={'100%'} height={'100%'} />
+      </div>
+    </>
   )
 }
 
