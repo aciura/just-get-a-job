@@ -7,20 +7,22 @@ import Slider from 'react-rangeslider'
 import dynamic from 'next/dynamic'
 
 import 'react-rangeslider/lib/index.css'
-import styles from '../styles/App.module.scss'
+import styles from '../styles/Home.module.scss'
 
 export default function Home({ jobOffers, offerCategories }) {
   const [minSalary, setMinSalary] = React.useState(0)
+  const [tempSliderValue, setTempSliderValue] = React.useState(0)
   const sliderRef = React.useRef()
 
   const router = useRouter()
+  const { slug } = router.query
+  const selectedCategory = slug?.length > 1 ? slug[1] : ''
 
-  let tempSliderValue = 0
   const handleChangeComplete = (e) => {
     setMinSalary(tempSliderValue)
   }
   const handleMinSalaryChange = (value) => {
-    tempSliderValue = Number(value)
+    setTempSliderValue(Number(value))
   }
 
   const displayedJobs = jobOffers.filter((job) => job.salary_to > minSalary)
@@ -37,37 +39,44 @@ export default function Home({ jobOffers, offerCategories }) {
 
   return (
     <div className={styles.home}>
-      <Map jobOffers={displayedJobs} />
-      <div className={styles.slider}>
-        <label htmlFor='minSalary'>Min Salary {minSalary}</label>
-        <Slider
-          ref={sliderRef}
-          value={minSalary}
-          min={0}
-          max={30000}
-          step={1000}
-          tooltip={true}
-          onChange={handleMinSalaryChange}
-          onChangeComplete={handleChangeComplete}
-        />
-      </div>
-      <div className={styles.categories}>
-        <button onClick={() => router.push('/')}>
-          <span>ALL</span>
-        </button>
-        {offerCategories.map(([category, count]) => (
+      <div className={styles.filters}>
+        <div className={styles.categories}>
           <button
-            style={{
-              fontSize: `${Math.max(12, count / 2)}px`,
-              transform: `rotate(${Math.ceil(Math.random() * 10) - 5}deg)`,
-            }}
-            key={category}
-            onClick={() => router.push(`/filter/${category}`)}>
-            <span>{category}</span>
-            &nbsp;
-            <span>{count}</span>
+            onClick={() => router.push('/')}
+            className={!selectedCategory ? styles.selected : ''}>
+            <span>ALL</span>
           </button>
-        ))}
+          {offerCategories.map(([category, count]) => (
+            <button
+              style={{
+                fontSize: `${Math.max(12, Math.min(32, count / 2))}px`,
+              }}
+              key={category}
+              onClick={() => router.push(`/filter/${category}`)}
+              className={category === selectedCategory ? styles.selected : ''}>
+              <span>{category}</span>
+              &nbsp;
+              <span>{count}</span>
+            </button>
+          ))}
+
+          <div className={styles.sliderContainer}>
+            <label htmlFor='minSalary'>Min Salary {minSalary}</label>
+            <Slider
+              styles={styles.slider}
+              ref={sliderRef}
+              value={tempSliderValue}
+              min={0}
+              max={30000}
+              step={1000}
+              tooltip={true}
+              onChange={handleMinSalaryChange}
+              onChangeComplete={handleChangeComplete}
+            />
+          </div>
+        </div>
+
+        <Map className={styles.map} jobOffers={displayedJobs} />
       </div>
 
       <div className={styles.grid}>

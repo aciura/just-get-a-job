@@ -18,13 +18,14 @@
 }
 
 .title {
-  text-align: center;
+  text-align: left;
   margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+  line-height: 1.5;
+  font-size: 3rem;
+  // background-color: #0047ab;
 
   a {
-    color: #0070f3;
+    color: #0047ab;
     text-decoration: none;
 
     a:hover,
@@ -36,64 +37,13 @@
 }
 
 .description {
-  display: inline;
+  display: none;
   position: relative;
   top: -1.5rem;
 
-  text-align: center;
+  text-align: left;
   line-height: 1;
   font-size: 1.5rem;
-}
-
-.home {
-  .categories {
-    text-align: center;
-    justify-content: center;
-    width: 90%;
-    margin: auto;
-
-    @media (min-width: 600px) {
-      width: 60%;
-    }
-
-    button {
-      padding: 10px;
-      transition: transform 0.1s ease-in;
-      margin: 4px;
-
-      &:hover {
-        transform: scale(1.2) !important;
-      }
-    }
-
-    span:nth-child(2) {
-      font-size: 10px;
-    }
-  }
-
-  .slider {
-    width: 90%;
-    margin: auto;
-
-    @media (min-width: 600px) {
-      width: 60%;
-    }
-  }
-
-  .grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    flex-direction: column;
-    margin-top: 3rem;
-
-    @media (min-width: 600px) {
-      flex-direction: row;
-      max-width: 90%;
-    }
-  }
 }
 
 .logo {
@@ -148,7 +98,7 @@
     width: 40px;
     height: 40px;
     border-style: solid;
-    border-color: black;
+    border-color: #000000cc;
     border-top-color: transparent;
     border-width: 4px;
     border-radius: 50%;
