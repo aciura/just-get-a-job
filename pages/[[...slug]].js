@@ -11,15 +11,20 @@ import styles from '../styles/App.module.scss'
 
 export default function Home({ jobOffers, offerCategories }) {
   const [minSalary, setMinSalary] = React.useState(0)
+  const sliderRef = React.useRef()
 
   const router = useRouter()
 
+  let tempSliderValue = 0
+  const handleChangeComplete = (e) => {
+    setMinSalary(tempSliderValue)
+  }
   const handleMinSalaryChange = (value) => {
-    const minSalary = Number(value)
-    setMinSalary(minSalary)
+    tempSliderValue = Number(value)
   }
 
   const displayedJobs = jobOffers.filter((job) => job.salary_to > minSalary)
+  displayedJobs.sort((job1, job2) => job2.salary_to - job1.salary_to)
 
   const Map = useMemo(
     () =>
@@ -31,7 +36,7 @@ export default function Home({ jobOffers, offerCategories }) {
   )
 
   return (
-    <div>
+    <div className={styles.home}>
       <Map jobOffers={displayedJobs} />
 
       <div>
@@ -47,19 +52,22 @@ export default function Home({ jobOffers, offerCategories }) {
         ))}
       </div>
 
-      <div style={{ width: '50%' }}>
+      <div className={styles.slider}>
         <label htmlFor='minSalary'>Min Salary {minSalary}</label>
         <Slider
+          ref={sliderRef}
           value={minSalary}
           min={0}
           max={30000}
           step={1000}
-          tooltip={false}
+          tooltip={true}
           onChange={handleMinSalaryChange}
+          onChangeComplete={handleChangeComplete}
         />
       </div>
 
       <div className={styles.grid}>
+        {!displayedJobs?.length && <span>No job offers matching filter</span>}
         <OffersList cards={displayedJobs} />
       </div>
     </div>
