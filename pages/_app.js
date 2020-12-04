@@ -1,17 +1,15 @@
 import React from 'react'
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styles from '../styles/App.module.scss'
-import Image from 'next/image'
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   const [loading, setLoading] = React.useState(false)
   const router = useRouter()
 
   React.useEffect(() => {
     const handleRouteChange = (url) => {
-      console.log('App is changing to: ', url)
       setLoading(true)
     }
     const handleRouteChangeComplete = () => {
@@ -38,6 +36,7 @@ function MyApp({ Component, pageProps }) {
         <h1 className={styles.title}>Just Join Corpo!</h1>
         <p className={styles.description}>Find your dream job</p>
         {loading && <div className={styles.spinner} />}
+
         <Component {...pageProps} />
       </main>
 
@@ -53,4 +52,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default App
