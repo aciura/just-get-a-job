@@ -26,7 +26,7 @@ function App({ Component, pageProps }) {
   }, [])
 
   return (
-    <div className={styles.container}>
+    <div key={router.route} className={styles.container}>
       <Head>
         <title>Just Get a Job</title>
         <link rel='icon' href='/favicon.ico' />
@@ -35,7 +35,7 @@ function App({ Component, pageProps }) {
       <main className={styles.main}>
         <h1 className={styles.title}>Just Get a Job</h1>
         <p className={styles.description}>Find your dream job</p>
-        {loading && <div className={styles.spinner} />}
+        {/* {loading && <div className={styles.spinner} />} */}
 
         <Component {...pageProps} />
       </main>
