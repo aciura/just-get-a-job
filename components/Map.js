@@ -1,5 +1,7 @@
 import React from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import styles from '../styles/Home.module.scss'
+
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import Link from 'next/link'
@@ -40,10 +42,10 @@ const Map = ({ jobOffers }) => {
   console.log('Map', center)
   return (
     <MapContainer
+      className={styles.map}
       center={[center.latitude, center.longitude]}
       zoom={6}
-      scrollWheelZoom={true}
-      style={{ height: 400, width: '100%' }}>
+      scrollWheelZoom={true}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

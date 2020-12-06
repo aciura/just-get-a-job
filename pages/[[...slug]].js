@@ -78,7 +78,7 @@ export default function Home({ jobOffers, offerCategories }) {
           </div>
         </div>
 
-        <Map className={styles.map} jobOffers={displayedJobs} />
+        <Map jobOffers={displayedJobs} />
       </div>
 
       <div className={styles.grid}>
