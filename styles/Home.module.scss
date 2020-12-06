@@ -64,17 +64,12 @@
     width: 100%;
     margin: 1rem 0 0 4px;
 
-    :global(.rangeslider__fill) {
-      background-color: #0047ab;
-      // background-color: grey;
+    @media (min-width: 600px) {
+      width: 90%;
     }
 
-    .slider {
-      width: 100%;
-
-      @media (min-width: 600px) {
-        width: 100%;
-      }
+    :global(.rangeslider__fill) {
+      background-color: #0047ab;
     }
   }
 
