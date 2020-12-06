@@ -31,7 +31,9 @@ export default function Home({ jobOffers, offerCategories }) {
   const Map = useMemo(
     () =>
       dynamic(() => import('../components/Map'), {
-        loading: () => <p>Loading map...</p>,
+        loading: () => (
+          <div className={styles.mapPlaceholder}>Loading map...</div>
+        ),
         ssr: false,
       }),
     [],
@@ -80,7 +82,9 @@ export default function Home({ jobOffers, offerCategories }) {
       </div>
 
       <div className={styles.grid}>
-        {!displayedJobs?.length && <span>No job offers matching filter</span>}
+        {!displayedJobs?.length && (
+          <h3>Sorry, no job offers matching your filter.</h3>
+        )}
         <OffersList cards={displayedJobs} />
       </div>
     </div>
@@ -115,6 +119,7 @@ export async function getStaticProps(context) {
         return map
       }, new Map()),
   )
+  offerCategories.sort()
 
   const { slug } = context.params
   console.log('getStaticProps', { slug })
