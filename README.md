@@ -1,6 +1,16 @@
 # Static Site generation and Server Side Rendering project - Just-Get-A-Job
 
-<img src="https://github.com/aciura/just-join-corpo/blob/main/just-get-a-job-pixel-2xl.jpg" alt='View on a Pixel-2-XL of the Just-Get-A-Job project' width='200' />
+Desktop view:
+<img
+  src="just-get-a-job-screenshot-1280x950.png"
+  alt="Screenshot of the Just-Get-a-Job project on Desktop"
+  width="640" />
+
+Mobile view:
+<img
+  src="https://github.com/aciura/just-join-corpo/blob/main/just-get-a-job-pixel-2xl.jpg"
+  alt='Screenshot of the Just-Get-A-Job project on a Pixel-2-XL'
+  width='400' />
 
 ### Check out this project live https://just-get-a-job.vercel.app/
 
@@ -8,11 +18,11 @@
 
 Project is written in latest ReactJS 17 using Hooks.
 
-Uses:
+Project is using:
 
-- Static site generation [Next.js](https://nextjs.org/)
-- [SCSS](https://sass-lang.com/)
-- Map component [React leaflet](https://react-leaflet.js.org/)
+- Static site generation with [Next.js](https://nextjs.org/)
+- Styling with SaSS/[SCSS](https://sass-lang.com/)
+- Displays map with markers with [React leaflet](https://react-leaflet.js.org/)
 
 ### `npm start`
 
