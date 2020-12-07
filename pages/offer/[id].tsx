@@ -3,23 +3,80 @@ import Image from 'next/image'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { GetStaticProps, GetStaticPaths } from 'next'
-import { JobOffer } from '../../services/JobOffer'
+import { JobOffer, ProgrammingSkill } from '../../services/JobOffer'
 import styles from '../../styles/JobOffer.module.scss'
+import React, { Fragment, useMemo } from 'react'
+import dynamic from 'next/dynamic'
+
+function Skill({ skill }: { skill: ProgrammingSkill }) {
+  return (
+    <li>
+      {skill.name}{' '}
+      {[...Array(skill.level)].map((_, i) => (
+        <Fragment key={i}>⭐</Fragment>
+      ))}
+    </li>
+  )
+}
 
 export default function JobOfferPage({ offer }: { offer: JobOffer }) {
   const router = useRouter()
+
+  const Map = useMemo(
+    () =>
+      dynamic(() => import('../../components/Map'), {
+        loading: () => (
+          <div className={styles.mapPlaceholder}>Loading map...</div>
+        ),
+        ssr: false,
+      }),
+    [],
+  )
+
   return (
     <>
       <Head>
         <title>{offer.title}</title>
-        <link rel='icon' href='/favicon.ico' />
       </Head>
+
       <div className={styles.jobOffer}>
-        <button onClick={() => router.back()}>{'<'} Back</button>
-        <pre>{offer.id}</pre>
-        <h3>{offer.title}</h3>
-        <p>{offer.company_name}</p>
-        <Image src={offer.company_logo_url} width={'100%'} height={'100%'} />
+        <div className={styles.details}>
+          <button onClick={() => router.back()}>{'<'}Back</button>
+
+          <h2>{offer.title}</h2>
+          <a href={offer.company_url}>
+            <Image
+              src={offer.company_logo_url}
+              width={'100%'}
+              height={'100%'}
+            />
+            <h3>{offer.company_name}</h3>
+          </a>
+          <p>
+            Address: {offer.street}, {offer.city}, {offer.country_code}
+          </p>
+          <p>Employment type: {offer.employment_type}</p>
+          <p>
+            Salary: {offer.salary_from} - {offer.salary_to}{' '}
+            {offer.salary_currency}
+          </p>
+
+          <p>
+            Requirements: {offer.experience_level}
+            <ul className={styles.skills}>
+              {offer.skills.map((skill) => (
+                <Skill skill={skill} />
+              ))}
+            </ul>
+          </p>
+        </div>
+
+        <Map
+          className={styles.map}
+          jobOffers={[offer]}
+          center={{ ...offer }}
+          zoomLevel={10}
+        />
       </div>
     </>
   )
