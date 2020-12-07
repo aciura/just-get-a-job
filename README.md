@@ -1,12 +1,14 @@
 # Static Site generation and Server Side Rendering project - Just-Get-A-Job
 
 Desktop view:
+
 <img
   src="just-get-a-job-screenshot-1280x950.png"
   alt="Screenshot of the Just-Get-a-Job project on Desktop"
   width="640" />
 
 Mobile view:
+
 <img
   src="https://github.com/aciura/just-join-corpo/blob/main/just-get-a-job-pixel-2xl.jpg"
   alt='Screenshot of the Just-Get-A-Job project on a Pixel-2-XL'
