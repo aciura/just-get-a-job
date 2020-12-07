@@ -16,6 +16,11 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 })
 
+export interface Position {
+  latitude: number
+  longitude: number
+}
+
 const getGeolocation = (setPosition) => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -32,21 +37,34 @@ const getGeolocation = (setPosition) => {
   }
 }
 
-const Map = ({ jobOffers }: { jobOffers: JobOffer[] }) => {
-  const [center, setCenter] = React.useState({
-    latitude: 52.76,
-    longitude: 17.4,
-  })
+const Map = ({
+  jobOffers,
+  className,
+  center = null,
+  zoomLevel = 6,
+}: {
+  jobOffers: JobOffer[]
+  className: string
+  center?: Position
+  zoomLevel?: number
+}) => {
+  const [mapCenter, setCenter] = React.useState(
+    center ?? {
+      latitude: 52.76,
+      longitude: 17.4,
+    },
+  )
   React.useEffect(() => {
-    getGeolocation(setCenter)
+    if (!center) getGeolocation(setCenter)
+    else setCenter(center)
   }, [])
 
-  console.log('Map', center)
+  console.log('Map', mapCenter)
   return (
     <MapContainer
-      className={styles.map}
-      center={[center.latitude, center.longitude]}
-      zoom={6}
+      className={className}
+      center={[mapCenter.latitude, mapCenter.longitude]}
+      zoom={zoomLevel}
       scrollWheelZoom={true}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

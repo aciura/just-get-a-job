@@ -1,4 +1,3 @@
-import { stringify } from 'querystring'
 import { JobCategoryWithCount, JobOffer } from './JobOffer'
 
 export async function getAllJobOffers(): Promise<JobOffer[]> {

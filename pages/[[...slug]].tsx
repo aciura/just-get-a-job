@@ -90,7 +90,7 @@ export default function Home({
           </div>
         </div>
 
-        <Map jobOffers={displayedJobs} />
+        <Map className={styles.map} jobOffers={displayedJobs} />
       </div>
 
       <div className={styles.grid}>
