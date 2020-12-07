@@ -1,6 +1,6 @@
 # Static Site generation and Server Side Rendering project - Just-Get-A-Job
 
-![Just-Get-A-Job UI](https://github.com/aciura/just-join-corpo/blob/main/just-get-a-job-pixel-2xl.jpg 'View on a Pixel-2-XL of the Just-Get-A-Job project' | width=200)
+![Just-Get-A-Job UI](https://github.com/aciura/just-join-corpo/blob/main/just-get-a-job-pixel-2xl.jpg 'View on a Pixel-2-XL of the Just-Get-A-Job project'){:width="50%"}
 
 ### Check out this project live https://just-get-a-job.vercel.app/
 
