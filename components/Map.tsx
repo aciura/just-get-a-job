@@ -5,6 +5,8 @@ import styles from '../styles/Home.module.scss'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import Link from 'next/link'
+import { JobOffer } from '../services/JobOffer'
+// Compiler: Please ignore this TS error
 delete L.Icon.Default.prototype._getIconUrl
 
 // Known issue with Leaflet & webpack: https://github.com/PaulLeCam/react-leaflet/issues/453
@@ -30,7 +32,7 @@ const getGeolocation = (setPosition) => {
   }
 }
 
-const Map = ({ jobOffers }) => {
+const Map = ({ jobOffers }: { jobOffers: JobOffer[] }) => {
   const [center, setCenter] = React.useState({
     latitude: 52.76,
     longitude: 17.4,

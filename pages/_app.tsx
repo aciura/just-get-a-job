@@ -1,15 +1,20 @@
 import React from 'react'
-import '../styles/globals.scss'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import styles from '../styles/App.module.scss'
+import { AppProps } from 'next/app'
 
-function App({ Component, pageProps }) {
+import styles from '../styles/App.module.scss'
+import '../styles/globals.scss'
+
+const APP_TITLE = 'Just Get a Job'
+
+function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = React.useState(false)
   const router = useRouter()
 
   React.useEffect(() => {
-    const handleRouteChange = (url) => {
+    const handleRouteChange = (url : string) => {
+      console.log('App route change', url)
       setLoading(true)
     }
     const handleRouteChangeComplete = () => {
@@ -28,13 +33,14 @@ function App({ Component, pageProps }) {
   return (
     <div key={router.route} className={styles.container}>
       <Head>
-        <title>Just Get a Job</title>
+        <title>{APP_TITLE}</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Just Get a Job</h1>
+        <h1 className={styles.title}>{APP_TITLE}</h1>
         <p className={styles.description}>Find your dream job</p>
+
         {loading && <div className={styles.spinner} />}
 
         <Component {...pageProps} />

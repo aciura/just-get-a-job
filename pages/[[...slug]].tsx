@@ -1,15 +1,26 @@
 import React, { useMemo } from 'react'
 import OffersList from '../components/OffersList'
-import { getAllJobOffers } from '../services/jobService'
+import {
+  getAllJobOffers,
+  getJobCategoriesWithCount,
+} from '../services/jobService'
 import { propsify } from '../services/utils'
 import { useRouter } from 'next/router'
 import Slider from 'react-rangeslider'
 import dynamic from 'next/dynamic'
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { JobCategoryWithCount, JobOffer } from '../services/JobOffer'
 
 import 'react-rangeslider/lib/index.css'
 import styles from '../styles/Home.module.scss'
 
-export default function Home({ jobOffers, offerCategories }) {
+export default function Home({
+  jobOffers,
+  offerCategories,
+}: {
+  jobOffers: JobOffer[]
+  offerCategories: JobCategoryWithCount[]
+}) {
   const [minSalary, setMinSalary] = React.useState(0)
   const [tempSliderValue, setTempSliderValue] = React.useState(0)
   const sliderRef = React.useRef()
@@ -25,8 +36,9 @@ export default function Home({ jobOffers, offerCategories }) {
     setTempSliderValue(Number(value))
   }
 
-  const displayedJobs = jobOffers.filter((job) => job.salary_to > minSalary)
-  displayedJobs.sort((job1, job2) => job2.salary_to - job1.salary_to)
+  const displayedJobs = jobOffers
+    .filter((job) => job.salary_to > minSalary)
+    .sort((job1, job2) => job2.salary_to - job1.salary_to)
 
   const Map = useMemo(
     () =>
@@ -48,7 +60,7 @@ export default function Home({ jobOffers, offerCategories }) {
             className={!selectedCategory ? styles.selected : ''}>
             <span>ALL</span>
           </button>
-          {offerCategories.map(([category, count]) => (
+          {offerCategories.map(({ category, count }) => (
             <button
               style={{
                 fontSize: `${Math.max(12, Math.min(32, count / 2))}px`,
@@ -91,7 +103,7 @@ export default function Home({ jobOffers, offerCategories }) {
   )
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const jobOffers = await getAllJobOffers()
   const offerCategories = Array.from(
     new Set(jobOffers.map((job) => job.marker_icon)).keys(),
@@ -107,24 +119,16 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
   const jobOffers = await getAllJobOffers()
-  const offerCategories = Array.from(
-    jobOffers
-      .map((job) => job.marker_icon)
-      .reduce((map, category) => {
-        const catCount = map.get(category)
-        if (catCount) map.set(category, catCount + 1)
-        else map.set(category, 1)
-        return map
-      }, new Map()),
-  )
-  offerCategories.sort()
+  const offerCategories = getJobCategoriesWithCount(jobOffers)
 
   const { slug } = context.params
   console.log('getStaticProps', { slug })
+
   const filterByCategory = (job) =>
     !slug || slug.length < 2 || job.marker_icon === slug[1]
+
   return {
     revalidate: 60 /*sec*/,
     ...propsify({
