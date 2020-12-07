@@ -54,7 +54,19 @@ function App({ Component, pageProps }: AppProps) {
           href='https://cloudtech.pl'
           target='_blank'
           rel='noopener noreferrer'>
-          Powered by Cloudtech.pl
+          ©️ Adrian Ciura
+        </a>
+        <a
+          href='https://cloudtech.pl'
+          target='_blank'
+          rel='noopener noreferrer'>
+          Check out my blog @ cloudtech.pl
+        </a>
+        <a
+          href='https://github.com/aciura/just-join-corpo'
+          target='_blank'
+          rel='noopener noreferrer'>
+          Source code for this project hosted on Github.
         </a>
       </footer>
     </div>
