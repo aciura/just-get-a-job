@@ -61,14 +61,14 @@ export default function JobOfferPage({ offer }: { offer: JobOffer }) {
             {offer.salary_currency}
           </p>
 
-          <p>
+          <div>
             Requirements: {offer.experience_level}
             <ul className={styles.skills}>
               {offer.skills.map((skill) => (
                 <Skill skill={skill} />
               ))}
             </ul>
-          </p>
+          </div>
         </div>
 
         <Map
