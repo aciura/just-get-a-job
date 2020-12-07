@@ -5,15 +5,16 @@ import { AppProps } from 'next/app'
 
 import styles from '../styles/App.module.scss'
 import '../styles/globals.scss'
+import Link from 'next/link'
 
-const APP_TITLE = 'Just Get a Job'
+const APP_TITLE = '👨‍💻 Just Get a Job'
 
 function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = React.useState(false)
   const router = useRouter()
 
   React.useEffect(() => {
-    const handleRouteChange = (url : string) => {
+    const handleRouteChange = (url: string) => {
       console.log('App route change', url)
       setLoading(true)
     }
@@ -38,7 +39,9 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>{APP_TITLE}</h1>
+        <h1 className={styles.title}>
+          <Link href={'/'}>{APP_TITLE}</Link>
+        </h1>
         <p className={styles.description}>Find your dream job</p>
 
         {loading && <div className={styles.spinner} />}
