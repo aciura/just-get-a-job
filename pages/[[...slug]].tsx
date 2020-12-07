@@ -63,7 +63,10 @@ export default function Home({
           {offerCategories.map(({ category, count }) => (
             <button
               style={{
-                fontSize: `${Math.max(12, Math.min(32, count / 2))}px`,
+                fontSize: `clamp(12px, ${Math.max(
+                  0.75,
+                  Math.min(2.5, count / 25),
+                )}*1vw, 3rem)`,
               }}
               key={category}
               onClick={() => router.push(`/filter/${category}`)}
