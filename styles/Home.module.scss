@@ -51,9 +51,9 @@
   }
 
   .map {
-    width: 90%;
+    width: 95%;
     height: 300px;
-    margin: auto;
+    margin: 0 auto 0 4px;
 
     @media (min-width: 768px) {
       width: 100%;
