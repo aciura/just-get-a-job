@@ -6,8 +6,7 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import Link from 'next/link'
 import { JobOffer } from '../services/JobOffer'
-// Compiler: Please ignore this TS error
-delete L.Icon.Default.prototype._getIconUrl
+delete (L.Icon.Default.prototype as any)._getIconUrl
 
 // Known issue with Leaflet & webpack: https://github.com/PaulLeCam/react-leaflet/issues/453
 L.Icon.Default.mergeOptions({
