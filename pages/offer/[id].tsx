@@ -1,5 +1,4 @@
 import { getAllJobIds, getJobOffer } from '../../services/jobService'
-import Image from 'next/image'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { GetStaticProps, GetStaticPaths } from 'next'
@@ -45,11 +44,7 @@ export default function JobOfferPage({ offer }: { offer: JobOffer }) {
 
           <h2>{offer.title}</h2>
           <a href={offer.company_url}>
-            <Image
-              src={offer.company_logo_url}
-              width={'100%'}
-              height={'100%'}
-            />
+            <img src={offer.company_logo_url} />
             <h3>{offer.company_name}</h3>
           </a>
           <p>
