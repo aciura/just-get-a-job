@@ -6,6 +6,7 @@ import { JobOffer, ProgrammingSkill } from '../../services/JobOffer'
 import styles from '../../styles/JobOffer.module.scss'
 import React, { Fragment, useMemo } from 'react'
 import dynamic from 'next/dynamic'
+import Spinner from '../../components/Spinner'
 
 function Skill({ skill }: { skill: ProgrammingSkill }) {
   return (
@@ -18,7 +19,11 @@ function Skill({ skill }: { skill: ProgrammingSkill }) {
   )
 }
 
-export default function JobOfferPage({ offer }: { offer: JobOffer }) {
+interface JobOfferPageProps {
+  offer?: JobOffer
+}
+
+export default function JobOfferPage({ offer }: JobOfferPageProps) {
   const router = useRouter()
 
   const Map = useMemo(
@@ -35,43 +40,49 @@ export default function JobOfferPage({ offer }: { offer: JobOffer }) {
   return (
     <>
       <Head>
-        <title>{offer.title}</title>
+        <title>{offer?.title ?? 'Loading'}</title>
       </Head>
 
       <div className={styles.jobOffer}>
-        <div className={styles.details}>
-          <button onClick={() => router.back()}>{'<'}Back</button>
+        {!offer ? (
+          <Spinner />
+        ) : (
+          <>
+            <div className={styles.details}>
+              <button onClick={() => router.back()}>{'<'}Back</button>
 
-          <h2>{offer.title}</h2>
-          <a href={offer.company_url}>
-            <img src={offer.company_logo_url} />
-            <h3>{offer.company_name}</h3>
-          </a>
-          <p>
-            Address: {offer.street}, {offer.city}, {offer.country_code}
-          </p>
-          <p>Employment type: {offer.employment_type}</p>
-          <p>
-            Salary: {offer.salary_from} - {offer.salary_to}{' '}
-            {offer.salary_currency}
-          </p>
+              <h2>{offer.title}</h2>
+              <a href={offer.company_url}>
+                <img src={offer.company_logo_url} />
+                <h3>{offer.company_name}</h3>
+              </a>
+              <p>
+                Address: {offer.street}, {offer.city}, {offer.country_code}
+              </p>
+              <p>Employment type: {offer.employment_type}</p>
+              <p>
+                Salary: {offer.salary_from} - {offer.salary_to}{' '}
+                {offer.salary_currency}
+              </p>
 
-          <div>
-            Requirements: {offer.experience_level}
-            <ul className={styles.skills}>
-              {offer.skills.map((skill) => (
-                <Skill skill={skill} />
-              ))}
-            </ul>
-          </div>
-        </div>
+              <div>
+                Requirements: {offer.experience_level}
+                <ul className={styles.skills}>
+                  {offer.skills.map((skill) => (
+                    <Skill skill={skill} />
+                  ))}
+                </ul>
+              </div>
+            </div>
 
-        <Map
-          className={styles.map}
-          jobOffers={[offer]}
-          center={{ ...offer }}
-          zoomLevel={10}
-        />
+            <Map
+              className={styles.map}
+              jobOffers={[offer]}
+              center={{ ...offer }}
+              zoomLevel={10}
+            />
+          </>
+        )}
       </div>
     </>
   )
@@ -82,7 +93,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const params = jobIds.map((id) => ({ params: { id } }))
   return {
     paths: params,
-    fallback: false,
+    fallback: true,
   }
 }
 

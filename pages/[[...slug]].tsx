@@ -14,13 +14,12 @@ import { JobCategoryWithCount, JobOffer } from '../services/JobOffer'
 import 'react-rangeslider/lib/index.css'
 import styles from '../styles/Home.module.scss'
 
-export default function Home({
-  jobOffers,
-  offerCategories,
-}: {
-  jobOffers: JobOffer[]
-  offerCategories: JobCategoryWithCount[]
-}) {
+interface HomeProps {
+  jobOffers?: JobOffer[]
+  offerCategories?: JobCategoryWithCount[]
+}
+
+export default function Home({ jobOffers, offerCategories }: HomeProps) {
   const [minSalary, setMinSalary] = React.useState(0)
   const [tempSliderValue, setTempSliderValue] = React.useState(0)
   const sliderRef = React.useRef()
@@ -36,9 +35,10 @@ export default function Home({
     setTempSliderValue(Number(value))
   }
 
-  const displayedJobs = jobOffers
-    .filter((job) => job.salary_to > minSalary)
-    .sort((job1, job2) => job2.salary_to - job1.salary_to)
+  const displayedJobs =
+    jobOffers
+      ?.filter((job) => job.salary_to > minSalary)
+      ?.sort((job1, job2) => job2.salary_to - job1.salary_to) ?? []
 
   const Map = useMemo(
     () =>
@@ -60,7 +60,7 @@ export default function Home({
             className={!selectedCategory ? styles.selected : ''}>
             <span>ALL</span>
           </button>
-          {offerCategories.map(({ category, count }) => (
+          {offerCategories?.map(({ category, count }) => (
             <button
               style={{
                 fontSize: `clamp(12px, ${Math.max(
@@ -118,7 +118,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }))
   return {
     paths: [...params, { params: { slug: [] } }],
-    fallback: false,
+    fallback: true,
   }
 }
 
@@ -133,7 +133,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     !slug || slug.length < 2 || job.marker_icon === slug[1]
 
   return {
-    revalidate: 60 /*sec*/,
+    revalidate: 5 /*sec*/,
     ...propsify({
       jobOffers: jobOffers.filter((job) => filterByCategory(job)),
       offerCategories,
