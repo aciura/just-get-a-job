@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { AppProps } from 'next/app'
-
+import Spinner from '../components/Spinner'
 import styles from '../styles/App.module.scss'
 import '../styles/globals.scss'
 import Link from 'next/link'
@@ -44,7 +44,7 @@ function App({ Component, pageProps }: AppProps) {
         </h1>
         <p className={styles.description}>Find your dream job</p>
 
-        {loading && <div className={styles.spinner} />}
+        {loading && <Spinner />}
 
         <Component {...pageProps} />
       </main>
