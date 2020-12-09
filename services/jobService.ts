@@ -1,16 +1,27 @@
 import { JobCategoryWithCount, JobOffer } from './JobOffer'
+import fs from 'fs'
+import path from 'path'
 
 export async function getAllJobOffers(): Promise<JobOffer[]> {
-  const url = `https://test.justjoin.it/offers`
-  console.log('GET', url)
-  try {
-    const response = await fetch(url)
-    const data = await response.json()
-    return data as JobOffer[]
-  } catch (error) {
-    console.error(error)
-    return []
-  }
+  return getAllJobOffersFromFile()
+  // const url = `https://test.justjoin.it/offers`
+  // console.log('GET', url)
+  // try {
+  //   const response = await fetch(url)
+  //   const data = await response.json()
+  //   return data as JobOffer[]
+  // } catch (error) {
+  //   console.error(error)
+  //   return []
+  // }
+}
+
+async function getAllJobOffersFromFile() {
+  const mockApiDir = path.join(process.cwd(), 'services')
+  const fullPath = path.join(mockApiDir, 'mock-api.json')
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  console.log(new Date(), 'READ all job offers', fullPath)
+  return JSON.parse(fileContents)
 }
 
 // TODO: Add new REST API returning only offer IDs
