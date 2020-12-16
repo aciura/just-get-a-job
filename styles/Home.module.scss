@@ -1,6 +1,16 @@
 .home {
   min-width: 320px;
 
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  animation: fadeIn 0.5s ease-in-out;
+
   .filters {
     display: flex;
     flex-direction: column;
@@ -104,34 +114,17 @@
     }
 
     @media (min-width: 505px) {
-      display: grid;
-      justify-items: stretch;
-      align-items: stretch;
-      justify-content: center;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      grid-template-rows: auto;
-      column-gap: 5px;
-      row-gap: 5px;
     }
 
     @media (min-width: 768px) {
-      display: grid;
-      justify-items: stretch;
-      align-items: stretch;
-      justify-content: center;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      grid-template-rows: auto;
       column-gap: 10px;
       row-gap: 10px;
     }
 
     @media (min-width: 1023px) {
-      display: grid;
-      justify-items: stretch;
-      align-items: stretch;
-      justify-content: center;
       grid-template-columns: repeat(5, minmax(0, 1fr));
-      grid-template-rows: auto;
       column-gap: 1rem;
       row-gap: 1rem;
     }

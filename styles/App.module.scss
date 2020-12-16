@@ -10,16 +10,6 @@
 
   min-width: 320px;
   max-width: 1200px;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  animation: fadeIn 0.5s ease-in-out;
 }
 
 .main {
@@ -93,7 +83,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.5);
+  // background-color: rgba(255, 255, 255, 0.5);
   z-index: 9999;
   display: block;
 
@@ -112,12 +102,12 @@
     position: absolute;
     left: 48%;
     top: 40%;
-    width: 40px;
-    height: 40px;
+    width: 64px;
+    height: 64px;
     border-style: solid;
-    border-color: #000000cc;
+    border-color: #00000055;
     border-top-color: transparent;
-    border-width: 4px;
+    border-width: 16px;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
