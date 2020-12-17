@@ -35,12 +35,15 @@ export default function Home({ jobOffers, offerCategories }: HomeProps) {
     setTempSliderValue(Number(value))
   }
 
-  const displayedJobs =
-    jobOffers
-      ?.filter((job) => job.salary_to > minSalary)
-      ?.sort((job1, job2) => job2.salary_to - job1.salary_to) ?? []
+  const displayedJobs = useMemo(
+    () =>
+      jobOffers
+        ?.filter((job) => job.salary_to > minSalary)
+        ?.sort((job1, job2) => job2.salary_to - job1.salary_to) ?? [],
+    [jobOffers, minSalary],
+  )
 
-  const Map = useMemo(
+  const MapComponent = useMemo(
     () =>
       dynamic(() => import('../components/Map'), {
         loading: () => (
@@ -49,6 +52,11 @@ export default function Home({ jobOffers, offerCategories }: HomeProps) {
         ssr: false,
       }),
     [],
+  )
+
+  const MapElementWithJobOffers = useMemo(
+    () => <MapComponent className={styles.map} jobOffers={displayedJobs} />,
+    [displayedJobs, MapComponent],
   )
 
   return (
@@ -92,8 +100,7 @@ export default function Home({ jobOffers, offerCategories }: HomeProps) {
             />
           </div>
         </div>
-
-        <Map className={styles.map} jobOffers={displayedJobs} />
+        {MapElementWithJobOffers}
       </div>
 
       <div className={styles.grid}>
