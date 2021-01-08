@@ -1,4 +1,4 @@
-# Static Site generation and Server Side Rendering project using Next.Js- Just-Get-A-Job
+# Static Site generation and Server Side Rendering project using Next.Js
 
 Desktop view:
 
